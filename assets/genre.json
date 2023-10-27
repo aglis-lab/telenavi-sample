@@ -1,0 +1,66 @@
+[
+    {
+        "label": "Action",
+        "key": "ACTION"
+    },{
+        "label": "Adult",
+        "key": "ADULT"
+    },{
+        "label": "Adventure",
+        "key": "ADVENTURE"
+    },{
+        "label": "Children's/Family",
+        "key": "FAMILY"
+    },{
+        "label": "Comedy",
+        "key": "COMEDY"
+    },{
+        "label": "Comedy Drama",
+        "key": "COMEDY_DRAMA"
+    },{
+        "label": "Crime",
+        "key": "CRIME"
+    },{
+        "label": "Drama",
+        "key": "DRAMA"
+    },{
+        "label": "Epic",
+        "key": "EPIC"
+    },{
+        "label": "Fantasy",
+        "key": "FANTASY"
+    },{
+        "label": "Historical Film",
+        "key": "HISTORICAL"
+    },{
+        "label": "Horor",
+        "key": "HOROR"
+    },{
+        "label": "Musical",
+        "key": "MUSICAL"
+    },{
+        "label": "Mystery",
+        "key": "MYSTERY"
+    },{
+        "label": "Romance",
+        "key": "ROMANCE"
+    },{
+        "label": "Science Fiction",
+        "key": "SCIENCE_FICTION"
+    },{
+        "label": "Superhero",
+        "key": "SUPER_HERO"
+    },{
+        "label": "Spy Film",
+        "key": "SPY"
+    },{
+        "label": "Thriller",
+        "key": "THRILLER"
+    },{
+        "label": "War",
+        "key": "WAR"
+    },{
+        "label": "Western",
+        "key": "WESTERN"
+    }
+]
