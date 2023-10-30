@@ -60,15 +60,14 @@ async function fetch(req: Request, res: Response) {
         where: {
             title: search ? Like(search) : undefined,
             genres: genre ? Like(genre) : undefined
-        }
+        },
+        relations: ['genres']
     }
 
     const count = await Movie.count(options)
     const data = await Movie.find(options)
-    const genresSource = (await Genre.find()).map((item) => item.key)
-    for (const item of data) {
-        item.genres = (item.genres as string).split(',').filter((item) => genresSource.includes(item)).join(',')
-    }
+    // const genresSource = (await Genre.find()).map((item) => item.key)
+    // const genres = 
 
     return res.send({
         result: data,
@@ -89,8 +88,17 @@ async function create(req: Request, res: Response) {
     newMovie.title = body.title
     newMovie.director = body.director
     newMovie.summary = body.summary
-    newMovie.genres = body.genres
+    newMovie.genres = []
     newMovie.image_url = req.file.path
+
+    for (const item of body.genres.split(',')) {
+        const newGenre = await Genre.findOne({
+            where: {
+                key: item
+            }
+        })
+        newMovie.genres.push(newGenre)
+    }
 
     try {
         const createdMovie = await newMovie.save()
@@ -133,9 +141,18 @@ async function update(req: Request, res: Response) {
     newMovie.title = body.title
     newMovie.director = body.director
     newMovie.summary = body.summary
-    newMovie.genres = body.genres
+    newMovie.genres = []
 
     try {
+        for (const item of body.genres.split(',')) {
+            const newGenre = await Genre.findOne({
+                where: {
+                    key: item
+                }
+            })
+            newMovie.genres.push(newGenre)
+        }
+
         await newMovie.save()
 
         await elasticClient.update({

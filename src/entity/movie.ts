@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, UpdateDateColumn, CreateDateColumn, DeleteDateColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, UpdateDateColumn, CreateDateColumn, DeleteDateColumn, ManyToMany, OneToMany, JoinTable } from "typeorm"
+import { Genre } from "./genre"
 
 @Entity()
 export class Movie extends BaseEntity {
@@ -17,8 +18,9 @@ export class Movie extends BaseEntity {
     @Column('text')
     summary: string
 
-    @Column()
-    genres: string
+    @JoinTable()
+    @ManyToMany((type) => Genre, (genre) => genre.movies)
+    genres: Genre[]
 
     @CreateDateColumn()
     createdAt: Date
