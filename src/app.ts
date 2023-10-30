@@ -1,5 +1,5 @@
 import express from "express";
-import { urlencoded } from "body-parser";
+import parser from "body-parser";
 import movieController from "./controller/movie";
 import { upload } from "./controller/upload";
 import genreController from "./controller/genre";
@@ -24,7 +24,7 @@ export class Application {
     initMiddleware() {
         this.app.use(cors())
         this.app.use(morgan('tiny'))
-        this.app.use(urlencoded({ extended: false }))
+        this.app.use(parser.urlencoded({ extended: false }))
         this.app.use('/assets', express.static('assets'))
     }
 
@@ -47,6 +47,9 @@ export class Application {
 
     initGenres(route: express.Router) {
         route.get('/', genreController.fetch)
+        route.post('/', genreController.create)
+        route.put('/:id', genreController.update)
+        route.delete('/:id', genreController.delete)
 
         return route
     }

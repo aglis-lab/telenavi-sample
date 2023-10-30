@@ -2,6 +2,7 @@ import { FindManyOptions, Like } from "typeorm";
 import { Movie } from "../entity/movie";
 import { Response, Request } from "express";
 import { elasticClient } from "../elasticsearch";
+import { Genre } from "../entity/genre";
 
 async function get(req: Request, res: Response) {
     const id = req.params.id
@@ -64,6 +65,10 @@ async function fetch(req: Request, res: Response) {
 
     const count = await Movie.count(options)
     const data = await Movie.find(options)
+    const genresSource = (await Genre.find()).map((item) => item.key)
+    for (const item of data) {
+        item.genres = (item.genres as string).split(',').filter((item) => genresSource.includes(item)).join(',')
+    }
 
     return res.send({
         result: data,
